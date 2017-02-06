@@ -1,0 +1,25 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.xpr._id ? 'Ajouter une expérience' : 'Ajouter une expérience'}}</h1>
+  </div>
+   <fieldset  data-ng-repeat="xpr in xprs">
+      <select>
+         <option>Mobile</option>
+         <option>Office</option>
+         <option>Home</option>
+      </select>
+      <input type="text" ng-model="xpr.name" name="" placeholder="Enter mobile number">
+      <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
+   </fieldset>
+   <button class="addfields" ng-click="addNewChoice()">Add fields</button>
+       
+   <div id="choicesDisplay">
+      {{ xprs }}
+   </div>
+   
+    <!-- <div class="form-group col-sm-12" ng-repeat="formfield in formData.dynamicFields">
+         <label class="col-sm-3 control-label">
+             {{formfield.name}}
+         </label>
+  </div> -->
+</section>

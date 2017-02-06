@@ -1,0 +1,99 @@
+<section>
+  <div class="page-header">
+    <h1>
+      Voitures
+      <a class="btn btn-primary pull-right" data-ui-sref="admin.cars.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+ 
+<!--   <div class="list-group">
+    <a data-ng-repeat="car in vm.cars" data-ui-sref="admin.cars.edit({carId: car._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posté le
+        <span data-ng-bind="car.created | date:'mediumDate'"></span>
+        par
+        <span ng-if="car.user" ng-bind="car.user.displayName"></span>
+        <span ng-if="!car.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="car.marque + ' ' + car.modele"></h4>
+      <p class="list-group-item-text" data-ng-bind="'puissance : ' + car.puissance"></p>
+      <p class="list-group-item-text" data-ng-bind="'puissance : ' + car.puissance"></p>
+    </a>
+  </div> -->
+<div class="col-md-3 col-xs-6">
+        <h3>Prix</h3>
+        <input type="number" name="" ng-model="minPrice" placeHolder="prix minimum"></input>
+        <input type="number" name="" max="700000" ng-model="maxPrice" placeHolder="prix maximum"></input>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+        <h3>Puissance</h3>
+        <input type="number" min="00" name="" ng-model="minPower" placeHolder="puissance minimum"></input>
+        <input type="number" max="700" name="" ng-model="maxPower" placeHolder="puissance maximum"></input>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+      <h3>Energie</h3>
+        <select type="text" name="marque" ng-model="energie">
+            <option value="">Energie</option>
+            <option value="essence">Essence</option>
+            <option value="diesel">Diesel</option>
+            <option value="electrique">Electrique</option>
+            <option value="gaz">Gaz</option>
+            <option value="hybride">Hybride</option>
+        </select>
+    </div>
+        <div class="col-md-3 col-xs-6">
+      <h3>Marque</h3> 
+        <select type="text" name="marque" ng-model="marquetype">
+            <option value="">Marque</option>
+            <option value="Renault">Renault</option>
+            <option value="Citroen">Citroen</option>
+            <option value="Mini">Mini</option>
+            <option value="Mercedes">Mercedes</option>
+            <option value="Nissan">Nissan</option>
+            <option value="Fiat">Fiat</option>
+            <option value="Dc Comics">Dc Comics</option>
+            <option value="VolksWagen">VolksWagen</option>
+        </select>
+    </div>
+
+    <table id="tableau" border="1" class="table table-stripedy">
+        <thead>
+            <tr>
+                <th>marque</th>
+                <th>modele</th>
+                <th>puissance</th>
+                <th>energie</th>
+                <th>prix (€ HT)</th>
+                <th>modifier</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr data-ng-repeat="car in vm.cars" ng-show="(minPower< car.puissance || !minPower) && (maxPower>car.puissance || !maxPower ) && (minPrice< car.prix || !minPrice) && ( maxPrice>car.prix|| !maxPrice)   && (!energie || energie===car.energie)  && (marquetype===car.marque || !marquetype) ">
+                <td>{{ car.marque | uppercase }}</td>
+                <td>{{ car.modele }}</td>
+                <td>{{ car.puissance }}</td>
+                <td>{{ car.energie }}</td>
+                <td>{{ car.prix }}</td>
+                <td>
+                  <a class="btn btn-primary" ng-click="vm.remove(car)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </a>
+                  <a class="btn btn-primary pull"  data-ui-sref="admin.cars.edit({carId: car._id})">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+  <div class="alert alert-warning text-center" data-ng-if="car.$resolved && !car.length">
+    No car yet, why don't you <a data-ui-sref="admin.cars.create">create one</a>?
+  </div>
+</section>
+

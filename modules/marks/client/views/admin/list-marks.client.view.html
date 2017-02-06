@@ -1,0 +1,73 @@
+<section>
+
+
+<!--         <select type="text" ng-model="marquetype">
+          <option value="">Marque</option>
+          <option data-ng-repeat="mark in vm.marks" ng-value="mark._id">
+              {{ mark.markName | uppercase  }}
+          </option>
+        </select> -->
+
+         <md-button class="md-raised md-primary" data-ui-sref="admin.marks.create">+ ajouter une marque</md-button>
+
+
+
+<div layout="row">
+  <md-input-container flex="25">
+    <label>Rechercher par marque</label>
+      <md-select name="triMarque" ng-model="marquetype">
+        <md-optgroup label="MARQUE">
+          <md-option value="">- TOUTES -</md-option>
+          <md-option data-ng-repeat="mark in vm.marks | orderBy:'markName'" ng-value="mark._id">{{ mark.markName | uppercase  }}</md-option>
+        </md-optgroup>
+      </md-select>
+  </md-input-container>
+</div>
+
+
+<!--     <table id="tableau" border="1" class="table table-stripedy">
+        <thead>
+            <tr>
+                <th>MARQUE</th>
+                <th>MODIFIER</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="mark in vm.marks" ng-show="(marquetype === mark._id || !marquetype)" >
+                <td>{{ mark.markName | uppercase  }}</td>
+                <td>                
+                  <md-button class="md-fab md-mini md-primary"  data-ui-sref="admin.cars.edit({markId: mark._id})"><i class="material-icons">mode_edit</i></md-button>
+                  <md-button class="md-fab md-mini md-primary red" ng-click="vm.remove(mark)"><i class="material-icons">delete</i></md-button>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+
+
+  <md-table-container>
+  <table md-table>
+    <thead md-head>
+      <tr md-row>
+        <th md-column>MARQUE</th>
+        <th md-column>MODIFIER</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row ng-repeat="mark in vm.marks | orderBy:'markName'" ng-show="(marquetype===mark._id || !marquetype) ">
+        <td md-cell>{{ mark.markName | uppercase }}</td>
+        <td>
+          <md-button class="md-fab md-mini md-primary"  data-ui-sref="admin.marks.edit({markId: mark._id})"><i class="material-icons">mode_edit</i></md-button>
+          <md-button class="md-fab md-mini md-primary red" ng-click="vm.remove(mark)"><i class="material-icons">delete</i></md-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+
+
+  <div class="alert alert-warning text-center" data-ng-if="mark.$resolved && !mark.length">
+    No mark yet, why don't you <a data-ui-sref="admin.marks.create">create one</a>?
+  </div>
+</section>
+

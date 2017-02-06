@@ -1,0 +1,29 @@
+<div>
+  <div class="page-header">
+    <h1>{{vm.mark._id ? 'Edit Mark' : 'New mark'}}</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.mark._id" class="btn btn-trash" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.markForm" class="form-horizontal" ng-submit="vm.save(vm.form.markForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group col-md-12" show-errors>
+
+          <label class="control-label" for="markName">Marques</label>
+          <input type="text" name="markName" ng-model="vm.mark.markName" id="markName" class="form-control" placeholder="Nom de la marque" required>
+          <div ng-messages="vm.form.markForm.markName.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Mark name is required.</p>
+          </div>
+
+
+        </div>
+        <div class="form-group col-md-12">
+          <md-button type="submit" class="btn btn-default">{{vm.mark._id ? 'Update' : 'ajouter'}}</md-button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

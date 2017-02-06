@@ -1,0 +1,80 @@
+<section>
+    <h1>voitures</h1>
+
+<div layout="row">
+  <md-input-container flex="25">
+    <label>Rechercher par marque</label>
+      <md-select name="triMarque" ng-model="marquetype">
+        <md-optgroup label="MARQUE">
+          <md-option value="">- TOUTES -</md-option>
+          <md-option data-ng-repeat="mark in vm.marks | orderBy:'markName'" ng-value="mark._id">{{ mark.markName | uppercase  }}</md-option>
+        </md-optgroup>
+      </md-select>
+  </md-input-container>
+
+
+  <md-input-container flex="25">
+    <label>Rechercher par énergie</label>
+      <md-select name="triEnergie" ng-model="triEnergie">
+        <md-optgroup label="ENERGIE" name="triEnergie" ng-model="triEnergie">
+          <md-option value="">- TOUTES -</md-option>
+          <md-option value="essence">Essence</md-option>
+          <md-option value="diesel">Diesel</md-option>
+          <md-option value="electrique">Electrique</md-option>
+          <md-option value="gaz">Gaz</md-option>
+          <md-option value="hybride">Hybride</md-option>
+        </md-optgroup>
+      </md-select>
+  </md-input-container>
+
+  <md-input-container flex="25">
+        <input type="number" name="" max="999999999" ng-model="maxPrice" placeHolder="prix maximum"></input>
+  </md-input-container>
+
+
+  <md-input-container flex="25">
+        <input type="number" name="" max="999999999" ng-model="minPower" placeHolder="puissance minimum"></input>
+  </md-input-container>
+</div>
+
+
+<md-table-container>
+  <table md-table>
+    <thead md-head>
+      <tr md-row>
+        <th md-column>MARQUE</th>
+        <th md-column>MODELE</th>
+        <th md-column>PUISSANCE</th>
+        <th md-column>ENERGIE</th>
+        <th md-column>PRIX</th>
+        <th md-column>PHOTO</th>
+        <th md-column>MODIFIER</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row ng-repeat="xpr in vm.xprs" ng-show="(minPower<= xpr.puissance || !minPower) && ( maxPrice>=xpr.prix|| !maxPrice)   && (!triEnergie || triEnergie===xpr.energie) && (marquetype===xpr.marque._id || !marquetype)">
+        <td md-cell>{{ xpr.marque.markName | uppercase }}</td>
+        <td md-cell>{{ xpr.modele }}</td>
+        <td md-cell>{{ xpr.puissance }}</td>
+        <td md-cell>{{ xpr.energie }}</td>
+        <td md-cell>{{ xpr.prix }} €</td>
+        <td md-cell>
+          <div class="form-group text-center zoom">
+            <img ng-src="{{ xpr.image }}">
+          </div>
+        </td>
+        <td>
+          <md-button class="md-fab md-mini md-primary" ui-sref="xprs.view({ xprId: xpr._id })"><i class="material-icons">add</i></md-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+  </div>
+
+
+
+
+
+</section>

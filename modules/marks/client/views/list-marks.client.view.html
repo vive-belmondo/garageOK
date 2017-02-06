@@ -1,0 +1,46 @@
+<section>
+  <div class="page-header">
+    <h1>Marks</h1>
+  </div>
+
+
+
+    
+    
+
+    
+    <form>
+        <input type="text" ng-model="marquetype" placeholder="recherche">
+    </form>
+
+  
+  <div class="col-md-12">
+   <table id="tableau" border="1" class="table table-stripedy">
+        <thead>
+            <tr>
+                <th>marque</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr data-ng-repeat="mark in vm.marks | filter: marquetype">
+                <td>{{ mark.markName | uppercase  }}</td>
+                <td>
+                  <a class="btn btn-primary" ng-click="vm.remove(mark)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </a>
+                  <a class="btn btn-primary pull"  data-ui-sref="admin.marks.edit({markId: mark._id})">
+                    <i class="glyphicon glyphicon-edit"></i>
+                  </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+
+
+
+
+</section>

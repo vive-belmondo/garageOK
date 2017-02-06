@@ -1,0 +1,110 @@
+<section>
+  <div class="page-header">
+    <h1>Cars</h1>
+  </div>
+<!--   <div class="list-group">
+    <a ng-repeat="car in vm.cars" ui-sref="cars.view({ carId: car._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="car.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="car.user" ng-bind="car.user.displayName"></span>
+        <span ng-if="!car.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="car.marque"></h4>
+      <p class="list-group-item-text" ng-bind="car.modele"></p>
+    </a>
+  </div> -->
+
+
+    <div>
+        <h3>Prix</h3>
+        <input type="number" name="" ng-model="minPrice" placeHolder="prix minimum"></input>
+        <input type="number" name="" max="700000" ng-model="maxPrice" placeHolder="prix maximum"></input>
+    </div>
+
+    <div>
+        <h3>Puissance</h3>
+        <input type="number" min="00" name="" ng-model="minPower" placeHolder="puissance minimum"></input>
+        <input type="number" max="700" name="" ng-model="maxPower" placeHolder="puissance maximum"></input>
+    </div>
+
+    <div>
+      <h3>Energie</h3>
+        <select type="text" name="marque" ng-model="energie">
+            <option value="">Energie</option>
+            <option value="essence">Essence</option>
+            <option value="diesel">Diesel</option>
+            <option value="electrique">Electrique</option>
+            <option value="gaz">Gaz</option>
+            <option value="hybride">Hybride</option>
+        </select>
+    </div>
+        <div>
+      <h3>Marque</h3>
+        <select type="text" name="marque" ng-model="marquetype">
+            <option value="">Marque</option>
+            <option data-ng-repeat="mark in vm.marks"  ng-value="mark._id">{{ mark.markName | uppercase  }}</option>
+        </select>
+    </div>
+
+<!--     <table id="tableau" border="1" class="table .table-bordered > thead > tr > th col-xs-12 col-sm-12 col-md-12 col-lg-12 table-striped > tbody > tr:nth-of-type(odd) table-hover > tbody > tr:hover">
+        <thead>
+            <tr>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>Puissance</th>
+                <th>Energie</th>
+                <th>Prix (€ HT)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr data-ng-repeat="car in vm.cars" ng-show="(minPower< car.puissance || !minPower) && (maxPower>car.puissance || !maxPower ) && (minPrice< car.prix || !minPrice) && ( maxPrice>car.prix|| !maxPrice)   && (!energie || energie===car.energie)  && (marquetype===car.marque._id || !marquetype) ">
+                <td>{{ car.marque.markName | uppercase }}</td>
+                <td>{{ car.modele }}</td>
+                <td>{{ car.puissance }}</td>
+                <td>{{ car.energie }}</td>
+                <td>{{ car.prix }}</td>
+                <td>
+                  <a class="btn btn-primary pull"  ui-sref="cars.view({ carId: car._id })">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </a>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+
+    <md-table-container>
+  <table md-table>
+    <thead md-head>
+      <tr md-row>
+        <th md-column><span>MARQUE</span></th>
+        <th md-column><span>MODELE</span></th>
+        <th md-column>PUISSANCE</th>
+        <th md-column>ENERGIE</th>
+        <th md-column>PRIX</th>
+        <th md-column>DETAILS</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row ng-repeat="car in vm.cars" ng-show="(minPower< car.puissance || !minPower) && (maxPower>car.puissance || !maxPower ) && (minPrice< car.prix || !minPrice) && ( maxPrice>car.prix|| !maxPrice)   && (!energie || energie===car.energie)  && (marquetype===car.marque._id || !marquetype) ">
+        <td md-cell>{{ car.marque.markName | uppercase }}</td>
+        <td md-cell>{{ car.modele }}</td>
+        <td md-cell>{{ car.puissance }}</td>
+        <td md-cell>{{ car.energie }}</td>
+        <td md-cell>{{ car.prix }} €</td>
+        <td>
+          <md-button class="md-fab md-mini md-primary" ui-sref="cars.view({ carId: car._id })">D</md-button>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+  </div>
+
+
+
+
+
+</section>

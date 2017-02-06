@@ -1,0 +1,39 @@
+<section>
+  <div class="page-header">
+    <h1>
+      <md-button class="md-raised md-primary green" data-ui-sref="admin.xprs.create">
+      + ajouter une expérience</md-button>
+      </a>
+    </h1>
+  </div>
+
+
+
+<md-table-container>
+  <table md-table>
+    <thead md-head>
+      <tr md-row>
+        <th md-column>Fonction</th>
+        <th md-column>Modifier</th>
+
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row ng-repeat="xpr in vm.xprs" >
+        <td md-cell>{{ xpr.fonction | uppercase }}</td>
+        <td>
+          <a data-ng-click="vm.downloadPdf(xpr)" target="blank"><img width="42" src="../modules/xprs/client/views/pdf-icon.png"></a>
+          <md-button class="md-fab md-mini md-primary"  data-ui-sref="admin.xprs.edit({xprId: xpr._id})"><i class="material-icons">mode_edit</i></md-button>
+          <md-button class="md-fab md-mini md-primary red" ng-click="vm.remove(xpr)"><i class="material-icons">delete</i></md-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+
+  <div class="alert alert-warning text-center" data-ng-if="xpr.$resolved && !xpr.length">
+    No xpr yet, why don't you <a data-ui-sref="admin.xprs.create">create one</a>?
+  </div>
+</section>
+

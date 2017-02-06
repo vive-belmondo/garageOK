@@ -1,0 +1,113 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.car._id ? 'Edit Car' : 'New car'}}</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.car._id" class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.carForm" class="form-horizontal" ng-submit="vm.save(vm.form.carForm.$valid)" novalidate>
+      <fieldset>
+        <!-- <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.car.title" id="title" class="form-control" placeholder="Title" required autofocus>
+          <div ng-messages="vm.form.carForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Car title is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="subtitle">Subtitle</label>
+          <input name="subtitle" type="text" ng-model="vm.car.subtitle" id="subtitle" class="form-control" placeholder="subtitle" >
+          <div ng-messages="vm.form.carForm.subtitle.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Car subtitle is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="content">Content</label>
+          <textarea name="content" data-ng-model="vm.car.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.car._id ? 'Update' : 'ajouter'}}</button>
+        </div>
+ -->
+
+
+
+
+
+<!--         <div class="form-group col-md-12" show-errors>
+          <label class="control-label" for="marque">Marque</label>
+          <input type="text" name="marque" ng-model="vm.car.marque" id="marque" class="form-control" placeholder="Marque" required autofocus>
+          <div ng-messages="vm.form.carForm.marque.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Car mark is required.</p>
+          </div> -->
+
+
+          <div class="form-group col-md-12" show-errors>
+
+            <label class="control-label" for="marque">Marque</label>
+            <div>
+              <select onchange="if(this.selectedIndex == 1) document.getElementById('AfficheInput').style.display = 'block'; else document.getElementById('AfficheInput').style.display = 'none';"
+    
+               type="text" name="marque" ng-model="vm.car.marque">
+<!--               <select onChange="vm.AjoutOptionAuSelect(this)" type="text" name="marque" ng-model="vm.car.marque"> -->
+                <option name="marque" value="">Marque</option>
+                <option name="marque" value="">Autre</option>
+                <option name="marque" value="Renault">Renault</option>
+                <option name="marque" value="Citroen">Citroen</option>
+                <option name="marque" value="Mini">Mini</option>
+                <option name="marque" value="Mercedes">Mercedes</option>
+                <option name="marque" value="Nissan">Nissan</option>
+                <option name="marque" value="Fiat">Fiat</option>
+                <option name="marque" value="Dc Comics">Dc Comics</option>
+                <option name="marque" value="VolksWagen">VolksWagen</option>
+              </select>
+              <input id="AfficheInput" type="text" style="display:none;" value="" ng-model="vm.car.marque"></div>
+
+            <div ng-messages="vm.form.carForm.marque.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Car mark is required.</p>
+            </div>
+
+
+
+
+          <label class="control-label" for="modele">Modele</label>
+          <input type="text" name="modele" ng-model="vm.car.modele" id="modele" class="form-control" placeholder="Modele" required >
+          <div ng-messages="vm.form.carForm.modele.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Car model is required.</p>
+          </div>
+
+          <label class="control-label" for="puissance">Puissance</label>
+          <input type="text" name="puissance" ng-model="vm.car.puissance" id="puissance" class="form-control" placeholder="Puissance" required>
+          <div ng-messages="vm.form.carForm.puissance.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Car mark is required.</p>
+          </div>
+
+          <label class="control-label" for="energie">Energie</label>
+            <input type="radio" name="energie" ng-model="vm.car.energie" value = "essence"> Essence
+            <input type="radio" name="energie" ng-model="vm.car.energie" value = "diesel"> Diesel
+            <input type="radio" name="energie" ng-model="vm.car.energie" value = "electrique"> Electrique
+            <input type="radio" name="energie" ng-model="vm.car.energie" value = "gaz"> Gaz
+            <input type="radio" name="energie" ng-model="vm.car.energie" value = "hybride"> Hybride
+          <div ng-messages="vm.form.carForm.energie.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Car energie is required.</p>
+          </div>
+
+
+          <label class="control-label" for="prix">Prix</label>
+          <input type="text" name="prix" ng-model="vm.car.prix" id="prix" class="form-control" placeholder="Prix" required >
+          <div ng-messages="vm.form.carForm.prix.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Car model is required.</p>
+          </div>
+
+        </div>
+        <div class="form-group col-md-12">
+          <button type="submit" class="btn btn-default">{{vm.car._id ? 'Update' : 'ajouter'}}</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div></div>
+</section>

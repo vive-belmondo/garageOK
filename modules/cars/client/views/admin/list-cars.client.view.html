@@ -1,0 +1,116 @@
+<div>
+  <div class="page-header" flex>
+    <h1>
+      <md-button class="md-raised md-primary green" data-ui-sref="admin.cars.create">
+      + ajouter une voiture</md-button>
+      </a>
+    </h1>
+  </div>
+
+
+<div layout-gt-sm="row" layout-xs="column" layout-sm="column">
+  <md-input-container>
+    <label>Rechercher par marque</label>
+      <md-select name="triMarque" ng-model="marquetype"><!-- ng-change="vm.getCarsByMark() -->
+        <md-optgroup label="MARQUE">
+          <md-option selected value="">- TOUTES -</md-option>
+          <md-option data-ng-repeat="mark in vm.marks | orderBy:'markName'" ng-value="mark._id">{{ mark.markName | uppercase  }}</md-option>
+        </md-optgroup>
+      </md-select>
+  </md-input-container>
+
+
+  <md-input-container>
+    <label>Rechercher par énergie</label>
+      <md-select name="triEnergie" ng-model="triEnergie">
+        <md-optgroup label="ENERGIE" name="triEnergie" ng-model="triEnergie">
+          <md-option value="">- TOUTES -</md-option>
+          <md-option value="essence">Essence</md-option>
+          <md-option value="diesel">Diesel</md-option>
+          <md-option value="electrique">Electrique</md-option>
+          <md-option value="gaz">Gaz</md-option>
+          <md-option value="hybride">Hybride</md-option>
+        </md-optgroup>
+      </md-select>
+  </md-input-container>
+
+  <md-input-container>
+        <input type="number" name="" max="999999999" ng-model="maxPrice" placeHolder="prix maximum"></input>
+  </md-input-container>
+
+
+  <md-input-container>
+        <input type="number" name="" max="999999999" ng-model="minPower" placeHolder="puissance minimum"></input>
+  </md-input-container>
+</div>
+
+
+<div>
+  <md-table-container show-gt-sm hide-xs hide-sm>
+    <table md-table>
+      <thead md-head>
+        <tr md-row>
+          <th md-column>MARQUE</th>
+          <th md-column>MODELE</th>
+          <th md-column>PUISSANCE</th>
+          <th md-column>ENERGIE</th>
+          <th md-column>PRIX</th>
+          <th md-column>PHOTO</th>
+          <th md-column>MODIFIER</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="car in vm.cars" ng-show="(minPower<= car.puissance || !minPower) && ( maxPrice>=car.prix|| !maxPrice)   && (!triEnergie || triEnergie===car.energie) && (marquetype===car.marque._id || !marquetype)">
+          <td md-cell>{{ car.marque.markName | uppercase }}</td>
+          <td md-cell>{{ car.modele }}</td>
+          <td md-cell>{{ car.puissance }}</td>
+          <td md-cell>{{ car.energie }}</td>
+          <td md-cell>{{ car.prix }} €</td>
+          <td md-cell>
+            <div class="form-group text-center">
+              <img class="miniature" ng-src="{{ car.image }}">
+            </div>
+          </td>
+          <td>
+            <a data-ng-click="vm.downloadPdf(car)" target="_blank"><img width="42" src="../modules/cars/client/views/pdf-icon.png"></a>
+            <md-button class="md-fab md-mini md-primary"  data-ui-sref="admin.cars.edit({carId: car._id})"><i class="material-icons">mode_edit</i></md-button>
+            <md-button class="md-fab md-mini md-primary red" ng-click="vm.remove(car)"><i class="material-icons">delete</i></md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+</div>
+
+
+
+
+<div layout ="row" >
+  <div hide show-xs show-sm flex>
+    <md-table-container >
+      <table md-table  >
+        <thead md-head md-row ng-repeat="car in vm.cars" ng-show="(minPower<= car.puissance || !minPower) && ( maxPrice>=car.prix|| !maxPrice)   && (!triEnergie || triEnergie===car.energie) && (marquetype===car.marque._id || !marquetype)">
+          <tr md-row><td md-column>MARQUE</td><td md-cell>{{ car.marque.markName | uppercase }}</td></tr>
+          <tr><td md-column>MODELE</td><td md-cell>{{ car.modele }}</td></tr>
+          <tr><td md-column>PUISSANCE</td><td md-cell>{{ car.puissance }}</td></tr>
+          <tr><td md-column>ENERGIE</td><td md-cell>{{ car.energie }}</td></tr>
+          <tr><td md-column>PRIX</td><td md-cell>{{ car.prix }} €</td></tr>
+          <tr><td md-column>PHOTO</td><td md-cell><div class="form-group text-center"><img  class="miniature"  ng-src="{{ car.image }}"></div></td></tr>
+          <tr><td md-column>MODIFIER</td>
+              <td>
+              <a data-ng-click="vm.downloadPdf(car)" target="_blank"><img width="42" src="../modules/cars/client/views/pdf-icon.png"></a>
+              <md-button class="md-fab md-mini md-primary"  data-ui-sref="admin.cars.edit({carId: car._id})"><i class="material-icons">mode_edit</i></md-button>
+              <md-button class="md-fab md-mini md-primary red" ng-click="vm.remove(car)"><i class="material-icons">delete</i></md-button>
+              </td>
+          </tr>
+        </thead>
+      </table>
+    </md-table-container>
+  </div>
+</div>
+
+<div class="alert alert-warning text-center" data-ng-if="car.$resolved && !car.length" layout-sm flex>
+    No car yet, why don't you <a data-ui-sref="admin.cars.create">create one</a>?
+</div>
+</section>
+
